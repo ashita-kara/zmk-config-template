@@ -6,8 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      # ここを「stable」に変えました！これで動きます
-      image: zmkfirmware/zmk-build-arm:stable
+      # ここを「stable」から「3.5」に変更しました！これで最新のZMKに対応します
+      image: zmkfirmware/zmk-build-arm:3.5
     name: Build
     steps:
       - name: Checkout
