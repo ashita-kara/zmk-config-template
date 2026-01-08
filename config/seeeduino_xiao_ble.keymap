@@ -1,0 +1,16 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+                &kp A      // 黒い線（D0）のボタン = 「A」
+                &kp B      // まだ繋いでいない（D1）のボタン = 「B」
+            >;
+        };
+    };
+};
