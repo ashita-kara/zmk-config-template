@@ -8,8 +8,8 @@
 
         default_layer {
             bindings = <
-                &kp A      // 黒い線（D0）のボタン = 「A」
-                &kp B      // まだ繋いでいない（D1）のボタン = 「B」
+                &kp C_VOL_UP      // 黒い線（D0）のボタン = 「A」
+                &kp C_VOL_DOWN      // まだ繋いでいない（D1）のボタン = 「B」
             >;
         };
     };
