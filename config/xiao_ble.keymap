@@ -10,18 +10,6 @@
             #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <4000>;
-            quick-tap-ms = <200>;#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
-
-/ {
-    behaviors {
-        /* 4秒長押しでリセット、短押しで音量UP */
-        my_rst: my_rst {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <4000>;
             quick-tap-ms = <200>;
             bindings = <&bt>, <&kp>;
         };
@@ -37,24 +25,6 @@
                 
                 /* 2つ目のボタン（D1）：数合わせのために必須（機能は音量DOWN） */
                 &kp C_VOL_DN
-            >;
-        };
-    };
-};
-            bindings = <&bt>, <&kp>;
-        };
-    };
-
-    keymap {
-        compatible = "zmk,keymap";
-
-        default_layer {
-            bindings = <
-                /* 1つ目のボタン（D0）：メイン機能 */
-                &my_rst BT_CLR C_VOL_UP
-                
-                /* 2つ目のボタン（D1）：エラー回避のための「何もしない」設定 */
-                &none
             >;
         };
     };
