@@ -20,7 +20,7 @@
 
         default_layer {
             bindings = <
-                /* ボタンは1つだけ */
+                /* 矛盾を無くすため、ボタンは1つだけ記述します */
                 &my_rst BT_CLR C_VOL_UP
             >;
         };
