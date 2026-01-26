@@ -4,13 +4,12 @@
 
 / {
     behaviors {
-        rst: rst {
+        my_rst: my_rst {
             compatible = "zmk,behavior-hold-tap";
-            label = "RESET_TAP";
             #binding-cells = <2>;
-            tapping-term-ms = <15000>;
-            quick-tap-ms = <0>;
             flavor = "tap-preferred";
+            tapping-term-ms = <4000>;
+            quick-tap-ms = <200>;
             bindings = <&bt>, <&kp>;
         };
     };
@@ -20,7 +19,7 @@
 
         default_layer {
             bindings = <
-                &rst BT_CLR C_VOL_UP
+                &my_rst BT_CLR C_VOL_UP
                 &kp C_VOL_DN
             >;
         };
