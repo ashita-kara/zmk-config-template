@@ -4,12 +4,12 @@
 
 / {
     behaviors {
-        /* 15秒長押しでリセット、短押しで音量UP */
+        /* 15秒長押しでリセット */
         my_rst: my_rst {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <15000>; /* 15秒に設定 */
+            tapping-term-ms = <15000>;
             quick-tap-ms = <200>;
             bindings = <&bt>, <&kp>;
         };
@@ -20,10 +20,10 @@
 
         default_layer {
             bindings = <
-                /* 1つ目のボタン（D0）：今回のメイン機能 */
+                /* 1つ目のボタン（実在する）：長押しリセット＆音量UP */
                 &my_rst BT_CLR C_VOL_UP
                 
-                /* 2つ目のボタン（D1）：これがないとエラーになります！ */
+                /* 2つ目のボタン（ダミー）：エラー回避のために必須 */
                 &kp C_VOL_DN
             >;
         };
