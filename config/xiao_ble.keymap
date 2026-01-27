@@ -1,19 +1,19 @@
-/* FINAL_PACKED_v7 */
+/* FINAL_DUMMY_ARG_v8 */
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
 / {
-    /* 1. まず「中身」を作ります（カプセル化） */
+    /* 1. 裏方：実際の動きをマクロで作っておく */
     macros {
-        /* Bluetooth情報を消す専用の命令 */
-        bt_clr_mac: bt_clr_mac {
+        /* BT消去マクロ */
+        mc_bt: mc_bt {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&bt BT_CLR>;
         };
-        /* 音量を上げる専用の命令 */
-        vol_up_mac: vol_up_mac {
+        /* 音量UPマクロ */
+        mc_vol: mc_vol {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp C_VOL_UP>;
@@ -21,15 +21,15 @@
     };
 
     behaviors {
-        /* 2. カプセルを使うボタンを作ります */
+        /* 2. ボタン定義：引数は2つ取るが、無視してマクロを呼ぶ */
         rst_btn: rst_btn {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <0>;  /* 引数は0個（中身は決まっているため） */
+            #binding-cells = <2>; /* ルール通り2にする！ */
             flavor = "tap-preferred";
-            tapping-term-ms = <15000>; /* 15秒長押し */
+            tapping-term-ms = <15000>;
             quick-tap-ms = <200>;
-            /* 長押しでBT削除、短押しで音量UP */
-            bindings = <&bt_clr_mac>, <&vol_up_mac>;
+            /* 引数が来ても無視して、固定のマクロを発動させる */
+            bindings = <&mc_bt>, <&mc_vol>;
         };
     };
 
@@ -38,10 +38,10 @@
 
         default_layer {
             bindings = <
-                /* ボタン1：カプセルを置くだけ（引数なし） */
-                &rst_btn
+                /* ボタン1：ダミーの「0 0」を渡す（これでエラー回避！） */
+                &rst_btn 0 0
                 
-                /* ボタン2：ダミー（音量ダウン） */
+                /* ボタン2：ダミーの音量ダウン */
                 &kp C_VOL_DN
             >;
         };
