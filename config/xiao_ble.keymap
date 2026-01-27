@@ -4,7 +4,7 @@
 
 / {
     behaviors {
-        /* 15秒長押しでリセット、短押しで音量UP */
+        /* 15秒長押しでリセット */
         my_rst: my_rst {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -20,10 +20,10 @@
 
         default_layer {
             bindings = <
-                /* 1つ目のボタン（D0）：メイン機能 */
+                /* 1つ目 */
                 &my_rst BT_CLR C_VOL_UP
                 
-                /* 2つ目のボタン（D1）：エラー回避のためのダミー（必須） */
+                /* 2つ目（ここが増えています！） */
                 &kp C_VOL_DN
             >;
         };
