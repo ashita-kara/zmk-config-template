@@ -4,8 +4,7 @@
 
 / {
     behaviors {
-        /* 15秒長押しでリセット */
-        my_rst: my_rst {
+        rst_btn: rst_btn {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
@@ -20,10 +19,7 @@
 
         default_layer {
             bindings = <
-                /* 1つ目：メイン機能 */
-                &my_rst BT_CLR C_VOL_UP
-                
-                /* 2つ目：数合わせ（必須） */
+                &rst_btn BT_CLR C_VOL_UP
                 &kp C_VOL_DN
             >;
         };
