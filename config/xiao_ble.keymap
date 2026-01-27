@@ -1,17 +1,31 @@
-/* DIAGNOSTIC_TEST_v1 */
+/* FINAL_VERSION_v6 */
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
 / {
+    behaviors {
+        /* 15s Reset / VolUp */
+        rst_btn: rst_btn {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <15000>;
+            quick-tap-ms = <200>;
+            bindings = <&bt>, <&kp>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
-                /* まずは標準的なキーだけでテストします */
-                &kp A
-                &kp B
+                /* Button 1: 15s Reset / Vol Up */
+                &rst_btn BT_CLR C_VOL_UP
+                
+                /* Button 2: Dummy (Vol Down) */
+                &kp C_VOL_DN
             >;
         };
     };
