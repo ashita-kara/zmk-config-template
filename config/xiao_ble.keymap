@@ -1,18 +1,35 @@
-/* FINAL_VERSION_v6 */
+/* FINAL_PACKED_v7 */
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
 / {
+    /* 1. まず「中身」を作ります（カプセル化） */
+    macros {
+        /* Bluetooth情報を消す専用の命令 */
+        bt_clr_mac: bt_clr_mac {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_CLR>;
+        };
+        /* 音量を上げる専用の命令 */
+        vol_up_mac: vol_up_mac {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp C_VOL_UP>;
+        };
+    };
+
     behaviors {
-        /* 15s Reset / VolUp */
+        /* 2. カプセルを使うボタンを作ります */
         rst_btn: rst_btn {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
+            #binding-cells = <0>;  /* 引数は0個（中身は決まっているため） */
             flavor = "tap-preferred";
-            tapping-term-ms = <15000>;
+            tapping-term-ms = <15000>; /* 15秒長押し */
             quick-tap-ms = <200>;
-            bindings = <&bt>, <&kp>;
+            /* 長押しでBT削除、短押しで音量UP */
+            bindings = <&bt_clr_mac>, <&vol_up_mac>;
         };
     };
 
@@ -21,10 +38,10 @@
 
         default_layer {
             bindings = <
-                /* Button 1: 15s Reset / Vol Up */
-                &rst_btn BT_CLR C_VOL_UP
+                /* ボタン1：カプセルを置くだけ（引数なし） */
+                &rst_btn
                 
-                /* Button 2: Dummy (Vol Down) */
+                /* ボタン2：ダミー（音量ダウン） */
                 &kp C_VOL_DN
             >;
         };
